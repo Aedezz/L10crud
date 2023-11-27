@@ -76,11 +76,11 @@ class BookController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'nis' => 'required|digits:9',
+            'nis' => 'required|digits:9|numeric',
             'name' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'angkatan' => 'required',
+            'angkatan' => 'required|numeric',
             'jk' => 'required',
             'sakit' => 'required',
             'penanganan' => 'required',
@@ -134,11 +134,11 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'nis' => 'required|digits:9',
+            'nis' => 'required|digits:9|numeric',
             'name' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'angkatan' => 'required',
+            'angkatan' => 'required|numeric',
             'jk' => 'required',
             'sakit' => 'required',
             'penanganan' => 'required',

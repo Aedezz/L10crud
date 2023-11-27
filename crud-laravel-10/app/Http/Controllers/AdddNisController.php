@@ -12,7 +12,7 @@ class AdddNisController extends Controller
      */
     public function index()
     {
-        $nis = Nis::orderBy('created_at', 'DESC')->paginate(1);
+        $nis = Nis::orderBy('created_at', 'DESC')->paginate(5);
         return view('pages.nis.index', compact('nis'));
     }
 
@@ -29,15 +29,13 @@ class AdddNisController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
-            'nis' => 'required|digits:9',
-            'name' => 'required',
-            'jk' => 'required',
+            'nis' => 'required|digits:9|numeric',
+            'name' => 'required|string',
+            'jk' => 'required|string',
         ], [
             'nis.required' => 'The NIS field is required.',
-            'nis.numeric' => 'The NIS field must be a number.',
-            'nis.unique' => 'The NIS field must be unique.',
+            'nis.digits' => 'The NIS field must be 9 digits.',
             'name.required' => 'The Name field is required.',
             'name.string' => 'The Name field must be a string.',
             'jk.required' => 'The Jenis Kelamin field is required.',
@@ -45,10 +43,11 @@ class AdddNisController extends Controller
         ]);
 
         Nis::create($validatedData);
-        Nis::create($request->all());
+        // Nis::created($request->all());
 
-        return redirect()->route('addnis.index')->with('succes', 'NIS Add succesfully');
+        return redirect()->route('addnis.index')->with('succes', 'NIS added successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -72,7 +71,7 @@ class AdddNisController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'nis' => 'required', // Replace 'your_field1' with the actual field name
+            'nis' => 'required|numeric', // Replace 'your_field1' with the actual field name
             'name' => 'required',
             'jk' =>'required',
         ], [

@@ -13,7 +13,7 @@ class AddPetugasController extends Controller
      */
     public function index()
     {
-        $petugas = Petugas::orderBy('created_at', 'DESC')->paginate(1);
+        $petugas = Petugas::orderBy('created_at', 'DESC')->paginate(5);
         return view('pages.petugas.index', compact('petugas'));
     }
 
@@ -30,21 +30,22 @@ class AddPetugasController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
-            'idpetugas' => 'required',
-            'nis' => 'required|digits:9',
+            'idpetugas' => 'required|numeric',
+            'nis' => 'required|digits:9|numeric',
         ], [
             'idpetugas.required' => 'The ID Petugas field is required.',
             'idpetugas.numeric' => 'The ID Petugas field must be a number.',
             'nis.required' => 'The NIS field is required.',
             'nis.numeric' => 'The NIS field must be a number.',
         ]);
-        Petugas::create($validatedData);
-        Petugas::create($request->all());
 
-        return redirect()->route('addpetugas.index')->with('succes', 'Data Petugas succesfully');
+        Petugas::create($validatedData);
+        // Kelas::create($request->all());
+
+        return redirect()->route('addpetugas.index')->with('succes', 'Data Petugas added successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -70,21 +71,22 @@ class AddPetugasController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'idpetugas' => 'required', // Replace 'your_field1' with the actual field name
-            'nis' => 'required',
+            'idpetugas' => 'required|numeric',
+            'nis' => 'required|digits:9|numeric',
         ], [
             'idpetugas.required' => 'The ID Petugas field is required.',
             'idpetugas.numeric' => 'The ID Petugas field must be a number.',
             'nis.required' => 'The NIS field is required.',
             'nis.numeric' => 'The NIS field must be a number.',
         ]);
-        Petugas::create($validatedData);
+
         $petugas = Petugas::findOrFail($id);
+        $petugas->update($validatedData);
+        // Kelas::update($request->all());
 
-        $petugas->update($request->all());
-
-        return redirect()->route('addpetugas.index')->with('succes', 'Petugas Updated succesfully');
+        return redirect()->route('addpetugas.index')->with('succes', 'Petugas Updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.

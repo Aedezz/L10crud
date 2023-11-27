@@ -13,7 +13,7 @@ class AddKelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::orderBy('created_at', 'DESC')->paginate(1);
+        $kelas = Kelas::orderBy('created_at', 'DESC')->paginate(5);
         return view('pages.kelas.index', compact('kelas'));
     }
 
@@ -30,28 +30,28 @@ class AddKelasController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $request->validate([
-            'idkelas' => 'required', // Replace 'your_field1' with the actual field name
-            'nis' => 'required',
+            'idkelas' => 'required|numeric',
+            'nis' => 'required|numeric|digits:9',
             'ta' => 'required',
-            'kelas' => 'required',
-            'jurusan' => 'required',
+            'kelas' => 'required|string',
+            'jurusan' => 'required|string',
         ], [
             'idkelas.required' => 'The ID Kelas field is required.',
             'idkelas.numeric' => 'The ID Kelas field must be a number.',
             'nis.required' => 'The NIS field is required.',
             'nis.numeric' => 'The NIS field must be a number.',
             'ta.required' => 'The Tahun Ajaran field is required.',
-            'ta.numeric' => 'The Tahun Ajaran field must be a numeric.',
             'kelas.required' => 'The Jenis Kelamin field is required.',
             'kelas.string' => 'The Jenis Kelamin field must be a string.',
         ]);
-        Kelas::create($validatedData);
-        Kelas::create($request->all());
 
-        return redirect()->route('addkelas.index')->with('succes', 'Data Kelas succesfully');
+        Kelas::create($validatedData);
+        // Kelas::created($request->all());
+
+        return redirect()->route('addkelas.index')->with('succes', 'Data Kelas added successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -77,11 +77,11 @@ class AddKelasController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'idkelas' => 'required',
+            'idkelas' => 'required|numeric',
             'nis' => 'required|digits:9',
             'ta' => 'required',
-            'kelas' => 'required',
-            'jurusan' => 'required',
+            'kelas' => 'required|string',
+            'jurusan' => 'required|string',
         ], [
             'idkelas.required' => 'The ID Kelas field is required.',
             'idkelas.numeric' => 'The ID Kelas field must be a number.',
@@ -89,17 +89,17 @@ class AddKelasController extends Controller
             'nis.numeric' => 'The NIS field must be a number.',
             'nis.unique' => 'The NIS field must be unique.',
             'ta.required' => 'The Tahun Ajaran field is required.',
-            'ta.numeric' => 'The Tahun Ajaran field must be a numeric.',
             'kelas.required' => 'The Jenis Kelamin field is required.',
             'kelas.string' => 'The Jenis Kelamin field must be a string.',
         ]);
-        Kelas::create($validatedData);
+
         $kelas = Kelas::findOrFail($id);
+        $kelas->update($validatedData);
+        // Kelas::update($request->all());
 
-        $kelas->update($request->all());
-
-        return redirect()->route('addkelas.index')->with('succes', 'Kelas Updated succesfully');
+        return redirect()->route('addkelas.index')->with('succes', 'Kelas Updated successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.

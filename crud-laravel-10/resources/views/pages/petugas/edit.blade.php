@@ -19,10 +19,10 @@
         <div class="row">
             <div class="col mb-3">
             <label class="form-label">ID Petugas</label>
-                <input type="text" name="idpetugas" class="form-control" placeholder="ID Petugas" value="{{ $petugas->petugas }}">
+                <input type="text" name="idpetugas" class="form-control" placeholder="ID Petugas" value="{{ $petugas->idpetugas }}">
             </div>
             <label class="form-label">NISN</label>
-                <input type="text" name="nis" class="form-control" placeholder="NISN" value="{{ $nis->nis }}">
+                <input type="text" name="nis" class="form-control" placeholder="NISN" value="{{ $petugas->nis }}">
             </div>
         </div>
         <div class="row">
