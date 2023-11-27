@@ -16,7 +16,7 @@
             <tr>
                 <th>No</th>
                 <th>ID Kelas</th>
-                <th>NIS</th>
+                <th>NIP</th>
                 <th>Tahun ajaran</th>
                 <th>Kelas</th>
                 <th>Jurusan</th>
@@ -29,15 +29,15 @@
                     <tr>
                         <td class="align-middle">{{ $loop->iteration}}</td>
                         <td class="align-middle">{{ $kls->idkelas}}</td>
-                        <td class="align-middle">{{ $kls->nis}}</td>
+                        <td class="align-middle">{{ $kls->nip}}</td>
                         <td class="align-middle">{{ $kls->ta}}</td>
                         <td class="align-middle">{{ $kls->kelas}}</td>
                         <td class="align-middle">{{ $kls->jurusan}}</td>
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('addkelas.show', $kls->id) }}" type="button" class="btn btn-secondary">Detail</a>
-                                <a href="{{ route('addkelas.edit', $kls->id) }}" button type="button" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('addkelas.destroy', $kls->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                                <a href="{{ route('addkelas.show', $kls->kelas) }}" type="button" class="btn btn-secondary">Detail</a>
+                                <a href="{{ route('addkelas.edit', $kls->kelas) }}" button type="button" class="btn btn-warning">Edit</a>
+                                <form action="{{ route('addkelas.destroy', $kls->kelas) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-0">Delete</button>

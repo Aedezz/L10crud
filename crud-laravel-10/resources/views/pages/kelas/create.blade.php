@@ -20,7 +20,7 @@
                 <input type="text" name="idkelas" class="form-control" placeholder="ID Kelas" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
             </div>
             <div class="col">
-                <input type="text" name="nis" class="form-control" placeholder="NIS" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="text" name="nip" class="form-control" placeholder="NIP" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
             </div>
             <div class="col">
                 <input type="text" name="ta" class="form-control" placeholder="Tahun Ajaran">

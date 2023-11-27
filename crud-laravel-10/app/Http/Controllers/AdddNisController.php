@@ -7,6 +7,11 @@ use App\Models\Nis;
 
 class AdddNisController extends Controller
 {
+    protected $connection = 'laravel-10-crud';
+    protected $table = 'nis';
+    protected $primaryKey = 'nis';
+    public $incrementing = false;
+
     /**
      * Display a listing of the resource.
      */
@@ -45,24 +50,27 @@ class AdddNisController extends Controller
         Nis::create($validatedData);
         // Nis::created($request->all());
 
-        return redirect()->route('addnis.index')->with('succes', 'NIS added successfully');
+        return redirect()->route('addnis.index')->with('success', 'NIS added successfully');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
-        $nis = Nis::findOrFail($id);
+        $nis = Nis::where('nis', $id)->first();
+        if (!$nis) {
+            return view('pages.nis.show')->with('failed', "Data doesn't exist!");
+        }
         return view('pages.nis.show', compact('nis'));
     }
 
-    public function edit(string $id)
+    public function edit($id)
     {
-        $nis = Nis::findOrFail($id);
+        $nis = Nis::where('nis', $id)->first();
+        if (!$nis) {
+            return view('pages.nis.edit')->with('failed', "Data doesn't exist!");
+        }
         return view('pages.nis.edit', compact('nis'));
     }
+
 
 
     /**
@@ -70,36 +78,44 @@ class AdddNisController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request->validate([
-            'nis' => 'required|numeric', // Replace 'your_field1' with the actual field name
-            'name' => 'required',
-            'jk' =>'required',
-        ], [
-            'nis.required' => 'The NIS field is required.',
-            'nis.numeric' => 'The NIS field must be a number.',
-            'name.required' => 'The Name field is required.',
-            'name.string' => 'The Name field must be a alphabet.',
-            'jk.required' => 'The Jenis Kelamin field is required.',
-            'jk.string' => 'The Jenis Kelamin field must be a alphabet.',
-        ]);
-        
-        $nis = Nis::findOrFail($id);
-        $nis->update($validatedData);
+        $nis = Nis::where('nis', $id)->first();
 
-        $nis->update($request->all());
+        if ($nis) {
+            $validatedData = $request->validate([
+                'nis' => 'required|numeric|digits:9',
+                'name' => 'required',
+                'jk' =>'required',
+            ], [
+                'nis.required' => 'The NIS field is required.',
+                'nis.numeric' => 'The NIS field must be a number.',
+                'name.required' => 'The Name field is required.',
+                'name.string' => 'The Name field must be an alphabet.',
+                'jk.required' => 'The Jenis Kelamin field is required.',
+                'jk.string' => 'The Jenis Kelamin field must be an alphabet.',
+            ]);
 
-        return redirect()->route('addnis.index')->with('succes', 'NIS Updated succesfully');
+            // Explicitly specify the primary key column in the update method
+            Nis::where('nis', $id)->update($validatedData);
+
+            return redirect()->route('addnis.index')->with('success', 'NIS Updated successfully');
+        }
+
+        return redirect()->route('addnis.index')->with('failed', 'Data not found');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $nis = Nis::findOrFail($id);
+        $deleted = Nis::where('nis', $id)->delete();
 
-        $nis->delete();
+        if ($deleted) {
+            return redirect()->route('addnis.index')->with('success', 'Data deleted successfully');
+        }
 
-        return redirect()->route('addnis.index')->with('succes', 'NIS Deleted succesfully');
+        return redirect()->route('addnis.index')->with('failed', "Data doesn't exist!");
     }
 }

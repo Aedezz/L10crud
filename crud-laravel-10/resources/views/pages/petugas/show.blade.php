@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col mb-3">
             <label class="form-label">ID Petugas</label>
-                <input type="text" name="petugas" class="form-control" placeholder="ID Petugas" value="{{ $petugas->petugas }}" readonly>
+                <input type="text" name="petugas" class="form-control" placeholder="ID Petugas" value="{{ $petugas->idpetugas }}" readonly>
             </div>
-            <label class="form-label">NISN</label>
+            <label class="form-label">NIS</label>
                 <input type="text" name="nis" class="form-control" placeholder="NISN" value="{{ $petugas->nis }}" readonly>
             </div>
         </div>

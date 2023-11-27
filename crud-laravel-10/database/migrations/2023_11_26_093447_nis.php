@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nis', function (Blueprint $table) {
-            $table->id();
-            $table->string('nis');
+            $table->string('nis')->primary();
             $table->string('name');
             $table->string('jk');
             $table->timestamps();

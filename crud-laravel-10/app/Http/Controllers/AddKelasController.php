@@ -8,6 +8,12 @@ use App\Models\Kelas;
 
 class AddKelasController extends Controller
 {
+
+    protected $connection = 'laravel-10-crud';
+    protected $table = 'idkelas';
+    protected $primaryKey = 'idkelas';
+    public $incrementing = false;
+
     /**
      * Display a listing of the resource.
      */
@@ -32,15 +38,15 @@ class AddKelasController extends Controller
     {
         $validatedData = $request->validate([
             'idkelas' => 'required|numeric',
-            'nis' => 'required|numeric|digits:9',
+            'nip' => 'required|numeric|digits:9',
             'ta' => 'required',
             'kelas' => 'required|string',
             'jurusan' => 'required|string',
         ], [
             'idkelas.required' => 'The ID Kelas field is required.',
             'idkelas.numeric' => 'The ID Kelas field must be a number.',
-            'nis.required' => 'The NIS field is required.',
-            'nis.numeric' => 'The NIS field must be a number.',
+            'nip.required' => 'The NIP field is required.',
+            'nip.numeric' => 'The NIP field must be a number.',
             'ta.required' => 'The Tahun Ajaran field is required.',
             'kelas.required' => 'The Jenis Kelamin field is required.',
             'kelas.string' => 'The Jenis Kelamin field must be a string.',
@@ -56,10 +62,13 @@ class AddKelasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $kelas = Kelas::findOrFail($id);
-        return view('pages.addkelas.show', compact('kelas'));
+        $kelas = Kelas::where('kelas', $id)->first();
+        if (!$kelas) {
+            return view('pages.kelas.show')->with('failed', "Data doesn't exist!");
+        }
+        return view('pages.kelas.show', compact('kelas'));
     }
 
     /**
@@ -67,7 +76,10 @@ class AddKelasController extends Controller
      */
     public function edit(string $id)
     {
-        $kelas = Kelas::findOrFail($id);
+        $kelas = Kelas::where('kelas', $id)->first();
+        if (!$kelas) {
+            return view('pages.kelas.edit')->with('failed', "Data doesn't exist!");
+        }
         return view('pages.kelas.edit', compact('kelas'));
     }
 
@@ -76,40 +88,46 @@ class AddKelasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request->validate([
-            'idkelas' => 'required|numeric',
-            'nis' => 'required|digits:9',
-            'ta' => 'required',
-            'kelas' => 'required|string',
-            'jurusan' => 'required|string',
-        ], [
-            'idkelas.required' => 'The ID Kelas field is required.',
-            'idkelas.numeric' => 'The ID Kelas field must be a number.',
-            'nis.required' => 'The NIS field is required.',
-            'nis.numeric' => 'The NIS field must be a number.',
-            'nis.unique' => 'The NIS field must be unique.',
-            'ta.required' => 'The Tahun Ajaran field is required.',
-            'kelas.required' => 'The Jenis Kelamin field is required.',
-            'kelas.string' => 'The Jenis Kelamin field must be a string.',
-        ]);
+        $kelas = kelas::where('kelas', $id)->first();
 
-        $kelas = Kelas::findOrFail($id);
-        $kelas->update($validatedData);
-        // Kelas::update($request->all());
+        if ($kelas) {
+            $validatedData = $request->validate([
+                'idkelas' => 'required|numeric',
+                'nip' => 'required|numeric|digits:9',
+                'ta' => 'required',
+                'kelas' => 'required|string',
+                'jurusan' => 'required|string',
+            ], [
+                'idkelas.required' => 'The ID Kelas field is required.',
+                'idkelas.numeric' => 'The ID Kelas field must be a number.',
+                'nip.required' => 'The NIP field is required.',
+                'nip.numeric' => 'The NIP field must be a number.',
+                'ta.required' => 'The Tahun Ajaran field is required.',
+                'kelas.required' => 'The Jenis Kelamin field is required.',
+                'kelas.string' => 'The Jenis Kelamin field must be a string.',
+            ]);
 
-        return redirect()->route('addkelas.index')->with('succes', 'Kelas Updated successfully');
+            // Explicitly specify the primary key column in the update method
+            Kelas::where('kelas', $id)->update($validatedData);
+
+            return redirect()->route('addkelas.index')->with('success', 'Kelas Updated successfully');
+        }
+
+        return redirect()->route('addkelas.index')->with('failed', 'Data not found');
     }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $kelas = Kelas::findOrFail($id);
+        $deleted = Kelas::where('kelas', $id)->delete();
 
-        $kelas->delete();
+        if ($deleted) {
+            return redirect()->route('addkelas.index')->with('success', 'Data deleted successfully');
+        }
 
-        return redirect()->route('addkelas.index')->with('succes', 'kelas Deleted succesfully');
+        return redirect()->route('addkelas.index')->with('failed', "Data doesn't exist!");
     }
 }

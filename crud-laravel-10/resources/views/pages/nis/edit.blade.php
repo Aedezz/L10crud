@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ route('addnis.update', $nis->id) }}" method="POST">
+    <form action="{{ route('addnis.update', $nis->nis) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row">

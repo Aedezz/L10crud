@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('petugas', function (Blueprint $table) {
-            $table->id();
-            $table->string('idpetugas');
+            $table->string('idpetugas')->primary();
             $table->string('nis');
+            $table->foreign('nis')->references('nis')->on('nis');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -13,6 +13,11 @@
             </ul>
         </div>
     @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <form action="{{ route('addpetugas.store') }}" method="POST">
         @csrf
         <div class="row mb-3">

@@ -39,11 +39,17 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::resource('book', BookController::class);
 Route::match(['get', 'post'], '/book/search', [BookController::class, 'search'])->name('search.books');
-Route::resource('/addnis', AdddNisController::class);
-Route::resource('/addkelas', AddKelasController::class);
-Route::resource('/addpetugas', AddPetugasController::class);
-Route::get('/dashboard',[DashboardController::class, 'index']);
 
+// NIS
+Route::resource('/addnis', AdddNisController::class);
+
+// KELAS
+Route::resource('/addkelas', AddKelasController::class);
+
+// PETUGAS
+Route::resource('/addpetugas', AddPetugasController::class);
+
+Route::get('/dashboard',[DashboardController::class, 'index']);
 
 
 // Route::get('/book/add', [BookController::class]);

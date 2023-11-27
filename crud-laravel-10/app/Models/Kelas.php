@@ -10,7 +10,7 @@ class Kelas extends Model
     use HasFactory;
     protected $fillable = [
         'idkelas',
-        'nis',
+        'nip',
         'ta',
         'kelas',
         'jurusan',

@@ -9,8 +9,8 @@
                 <label class="form-label">ID Kelas</label>
                 <input type="text" name="idkelas" class="form-control" placeholder="ID kelas" value="{{ $kelas->idkelas }}" readonly>
             </div>
-            <label class="form-label">NIS</label>
-                <input type="text" name="nis" class="form-control" placeholder="NIS" value="{{ $kelas->nis }}" readonly>
+            <label class="form-label">NIP</label>
+                <input type="text" name="nip" class="form-control" placeholder="NIP" value="{{ $kelas->nip }}" readonly>
             </div>
             <label class="form-label">Tahun ajaran</label>
                 <input type="text" name="ta" class="form-control" placeholder="Tahun Ajaran" value="{{ $kelas->ta }}" readonly>
@@ -20,7 +20,7 @@
                 <input type="text" name="kelas" class="form-control" placeholder="Kelas" value="{{ $kelas->kelas }}" readonly>
             </div>
             <label class="form-label">Jurusan</label>
-                <input type="text" name="jurusan" class="form-control" placeholder="jurusan" value="{{ $kelas->kelas }}" readonly>
+                <input type="text" name="jurusan" class="form-control" placeholder="jurusan" value="{{ $kelas->jurusan }}" readonly>
             </div>
         </div>
         <div class="row">

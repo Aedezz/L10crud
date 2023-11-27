@@ -6,9 +6,9 @@
         <a href="{{ route('addpetugas.create') }}" class="btn btn-primary">Add Petugas Siswa</a>
     </div>
     <hr />
-    @if(Session::has('succes'))
+    @if(Session::has('success'))
         <div class="alert alert-success" role="alert">
-            {{ Session::get('succes')}}
+            {{ Session::get('success')}}
         </div>
     @endif
     <table class="table table-hover">
@@ -29,9 +29,9 @@
                         <td class="align-middle">{{ $p->nis}}</td>
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('addpetugas.show', $p->id) }}" type="button" class="btn btn-secondary">Detail</a>
-                                <a href="{{ route('addpetugas.edit', $p->id) }}" button type="button" class="btn btn-warning">Edit</a>
-                                <form action="{{ route('addpetugas.destroy', $p->id) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                                <a href="{{ route('addpetugas.show', $p->idpetugas) }}" type="button" class="btn btn-secondary">Detail</a>
+                                <a href="{{ route('addpetugas.edit', $p->idpetugas) }}" button type="button" class="btn btn-warning">Edit</a>
+                                <form action="{{ route('addpetugas.destroy', $p->idpetugas) }}" method="POST" type="button" class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-0">Delete</button>
