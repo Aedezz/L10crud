@@ -31,7 +31,7 @@ class AdddNisController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'nis' => 'required', // Replace 'your_field1' with the actual field name
+            'nis' => 'required|digits:9',
             'name' => 'required',
             'jk' => 'required',
         ], [

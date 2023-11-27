@@ -77,8 +77,8 @@ class AddKelasController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'idkelas' => 'required', // Replace 'your_field1' with the actual field name
-            'nis' => 'required',
+            'idkelas' => 'required',
+            'nis' => 'required|digits:9',
             'ta' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',

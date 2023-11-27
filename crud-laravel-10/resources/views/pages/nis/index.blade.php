@@ -3,7 +3,7 @@
 @section('body')
     <div class="d-flex align-items justify-content-between">
         <h1>List NIS</h1>
-        <a href="{{ route('addnis.create') }}" class="btn btn-primary">Add NIS</a>
+        <a href="{{ route('addnis.create') }}" class="btn btn-primary">Add Siswa</a>
     </div>
     <hr />
     @if(Session::has('succes'))

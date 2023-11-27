@@ -32,8 +32,8 @@ class AddPetugasController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'idpetugas' => 'required', // Replace 'your_field1' with the actual field name
-            'nis' => 'required',
+            'idpetugas' => 'required',
+            'nis' => 'required|digits:9',
         ], [
             'idpetugas.required' => 'The ID Petugas field is required.',
             'idpetugas.numeric' => 'The ID Petugas field must be a number.',
