@@ -37,9 +37,9 @@ class AdddNisController extends Controller
             'nis.required' => 'The NIS field is required.',
             'nis.digits' => 'The NIS field must be 9 digits.',
             'name.required' => 'The Name field is required.',
-            'name.string' => 'The Name field must be a string.',
+            'name.string' => 'The Name field must be a alphabet',
             'jk.required' => 'The Jenis Kelamin field is required.',
-            'jk.string' => 'The Jenis Kelamin field must be a string.',
+            'jk.string' => 'The Jenis Kelamin field must be a alphabet',
         ]);
 
         Nis::create($validatedData);
@@ -77,11 +77,10 @@ class AdddNisController extends Controller
         ], [
             'nis.required' => 'The NIS field is required.',
             'nis.numeric' => 'The NIS field must be a number.',
-            'nis.unique' => 'The NIS field must be unique.',
             'name.required' => 'The Name field is required.',
-            'name.string' => 'The Name field must be a string.',
+            'name.string' => 'The Name field must be a alphabet.',
             'jk.required' => 'The Jenis Kelamin field is required.',
-            'jk.string' => 'The Jenis Kelamin field must be a string.',
+            'jk.string' => 'The Jenis Kelamin field must be a alphabet.',
         ]);
         
         $nis = Nis::findOrFail($id);
