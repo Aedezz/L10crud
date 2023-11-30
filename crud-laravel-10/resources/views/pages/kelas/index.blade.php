@@ -16,7 +16,7 @@
             <tr>
                 <th>No</th>
                 <th>ID Kelas</th>
-                <th>NIP</th>
+                {{-- <th>NIP</th> --}}
                 <th>Tahun ajaran</th>
                 <th>Kelas</th>
                 <th>Jurusan</th>
@@ -29,7 +29,7 @@
                     <tr>
                         <td class="align-middle">{{ $loop->iteration}}</td>
                         <td class="align-middle">{{ $kls->idkelas}}</td>
-                        <td class="align-middle">{{ $kls->nip}}</td>
+                        {{-- <td class="align-middle">{{ $kls->nip}}</td> --}}
                         <td class="align-middle">{{ $kls->ta}}</td>
                         <td class="align-middle">{{ $kls->kelas}}</td>
                         <td class="align-middle">{{ $kls->jurusan}}</td>

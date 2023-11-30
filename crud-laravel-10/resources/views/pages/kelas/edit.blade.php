@@ -23,10 +23,10 @@
                 <label class="form-label">ID Kelas</label>
                 <input type="text" name="idkelas" class="form-control" placeholder="ID Kelas" value="{{ $kelas->idkelas }}">
             </div>
-            <div class="col mb-3">
+            {{-- <div class="col mb-3">
                 <label class="form-label">NIP</label>
                 <input type="text" name="nip" class="form-control" placeholder="NIP" value="{{ $kelas->nip }}">
-            </div>
+            </div> --}}
         </div>
 
         <div class="row">

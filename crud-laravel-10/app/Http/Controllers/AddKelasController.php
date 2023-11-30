@@ -38,15 +38,15 @@ class AddKelasController extends Controller
     {
         $validatedData = $request->validate([
             'idkelas' => 'required|numeric',
-            'nip' => 'required|numeric|digits:9',
+            // 'nip' => 'required|numeric|digits:9',
             'ta' => 'required',
             'kelas' => 'required|string',
             'jurusan' => 'required|string',
         ], [
             'idkelas.required' => 'The ID Kelas field is required.',
             'idkelas.numeric' => 'The ID Kelas field must be a number.',
-            'nip.required' => 'The NIP field is required.',
-            'nip.numeric' => 'The NIP field must be a number.',
+            // 'nip.required' => 'The NIP field is required.',
+            // 'nip.numeric' => 'The NIP field must be a number.',
             'ta.required' => 'The Tahun Ajaran field is required.',
             'kelas.required' => 'The Jenis Kelamin field is required.',
             'kelas.string' => 'The Jenis Kelamin field must be a string.',
@@ -93,15 +93,15 @@ class AddKelasController extends Controller
         if ($kelas) {
             $validatedData = $request->validate([
                 'idkelas' => 'required|numeric',
-                'nip' => 'required|numeric|digits:9',
+                // 'nip' => 'required|numeric|digits:9',
                 'ta' => 'required',
                 'kelas' => 'required|string',
                 'jurusan' => 'required|string',
             ], [
                 'idkelas.required' => 'The ID Kelas field is required.',
                 'idkelas.numeric' => 'The ID Kelas field must be a number.',
-                'nip.required' => 'The NIP field is required.',
-                'nip.numeric' => 'The NIP field must be a number.',
+                // 'nip.required' => 'The NIP field is required.',
+                // 'nip.numeric' => 'The NIP field must be a number.',
                 'ta.required' => 'The Tahun Ajaran field is required.',
                 'kelas.required' => 'The Jenis Kelamin field is required.',
                 'kelas.string' => 'The Jenis Kelamin field must be a string.',

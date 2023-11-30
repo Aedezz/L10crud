@@ -12,7 +12,7 @@ class Kelas extends Model
     
     protected $fillable = [
         'idkelas',
-        'nip',
+        // 'nip',
         'ta',
         'kelas',
         'jurusan',

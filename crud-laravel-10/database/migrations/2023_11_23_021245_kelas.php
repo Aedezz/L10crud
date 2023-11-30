@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->string('idkelas')->primary();
-            $table->string('nip');
+            // $table->string('nip');
             // $table->foreign('nip')->references('nip')->on('nip');
             $table->string('ta');
             $table->string('kelas');
