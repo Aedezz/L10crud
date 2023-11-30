@@ -19,9 +19,6 @@
           <a class="nav-link" href="/addkelas">List Kelas Siswa</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/addpetugas">List Petugas Siswa</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="/dashboard">Chart Data</a>
         </li>
       </ul>

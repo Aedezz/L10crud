@@ -25,7 +25,7 @@ class DataUKSChart
         for ($i = 1; $i <= $bulan; $i++) {
             $totalUKS = ModelsBook::whereYear('created_at', $tahun)
                                   ->whereMonth('created_at', $i)
-                                  ->sum('nis');
+                                  ->count();
 
             $dataBulan[] = Carbon::create()->month($i)->format('F');
             $dataTotalUKS[] = $totalUKS;

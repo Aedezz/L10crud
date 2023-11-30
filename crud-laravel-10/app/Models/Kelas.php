@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'idkelas';
+    
     protected $fillable = [
         'idkelas',
         'nip',

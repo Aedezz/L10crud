@@ -12,21 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->string('iduks')->primary();
+            $table->increments('iduks');
             $table->string('nis');
             $table->foreign('nis')->references('nis')->on('nis');
-            
-            $table->string('idpetugas');
-            $table->foreign('idpetugas')->references('idpetugas')->on('petugas');
-            
-            $table->string('idkelas');
-            $table->foreign('idkelas')->references('idkelas')->on('kelas');
-            
-            $table->string('name');
-            $table->string('kelas');
-            $table->string('jurusan');
-            $table->text('angkatan');
-            $table->string('jk');
+
+            $table->string('idkelas')->nullable();
+            $table->foreign('idkelas')->references('idkelas')->on('kelas')->nullable();        
+
             $table->string('sakit');
             $table->string('penanganan');
             $table->string('petugas');

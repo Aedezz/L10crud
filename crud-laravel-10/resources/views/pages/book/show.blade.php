@@ -10,24 +10,23 @@
                 <input type="text" name="nis" class="form-control" placeholder="NIS" value="{{ $book->nis }}" readonly>
             </div>
             <label class="form-label">Nama</label>
-                <input type="text" name="name" class="form-control" placeholder="Book Name" value="{{ $book->name }}" readonly>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Book Name" value="{{ $book->name }}" readonly>
             </div>
             <div class="col mb-3">
             <label class="form-label">Kelas</label>
                 <input type="text" name="kelas" class="form-control" placeholder="Kelas" value="{{ $book->kelas }}" readonly>
             </div>
-        </div>
-        <div class="row">
             <div class="col mb-3">
             <label class="form-label">Jurusan</label>
                 <input type="text" name="jurusan" class="form-control" placeholder="Jurusan" value="{{ $book->jurusan }}" readonly>
             </div>
             <div class="col mb-3">
-                <label class="form-label">Angkatan</label>
-                <input type="text" name="angkatan" class="form-control" placeholder="Angkatan" value="{{ $book->angkatan }}" readonly>
+            <label class="form-label">Tahun Ajaran</label>
+                <input type="text" name="ta" class="form-control" placeholder="Tahun Ajaran" value="{{ $book->ta }}" readonly>
             </div>
+        </div>
             <label class="form-label">Jenis kelamin</label>
-                <input type="text" name="jk" class="form-control" placeholder="Jenis Kelamin" value="{{ $book->jk }}" readonly>
+                <input type="text" name="jk" id="jk" class="form-control" placeholder="Jenis Kelamin" value="{{ $book->jk }}" readonly>
             </div>
             <label class="form-label">Sakit</label>
                 <input type="text" name="sakit" class="form-control" placeholder="Sakit" value="{{ $book->sakit }}" readonly>

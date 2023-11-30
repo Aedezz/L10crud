@@ -1,6 +1,7 @@
 @extends ('layouts.app')
 
 @section('body')
+
         <h1 class="mb-0">Add Book</h1>
     </div>
     <hr />
@@ -17,24 +18,23 @@
         @csrf
         <div class="row mb-3">
             <div class="col">
-                <input type="text" name="nis" class="form-control" placeholder="NIS" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                <input type="text" name="nis" id="nis" class="form-control" placeholder="NIS" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
             </div>
             <div class="col">
-                <input type="text" name="name" class="form-control" placeholder="Nama">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Nama" readonly>
             </div>
             <div class="col">
-                <input type="text" name="kelas" class="form-control" placeholder="Kelas">
+                <select name="idkelas" id="idkelas" class="form-control">
+                    <option value="">-- Pilih Kelas --</option>
+                    @foreach ($kelas as $k)
+                    <option value="{{$k->idkelas}}">{{ $k->kelas}} | {{ $k->jurusan}} | {{ $k->ta}}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <input type="text" name="jurusan" class="form-control" placeholder="Jurusan">
-            </div>  
-            <div class="col">
-                <input type="text" name="angkatan" class="form-control" placeholder="Angkatan" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-            </div>
-            <div class="col">
-                <input type="text" name="jk" class="form-control" placeholder="Jenis Kelamin">
+                <input type="text" name="jk" id="jk" class="form-control" placeholder="Jenis Kelamin" readonly>
             </div>
             <div class="col">
                 <input type="text" name="sakit" class="form-control" placeholder="Sakit">
@@ -52,4 +52,27 @@
             </div>
         </div>
     </form>
-    @endsection
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $("#nis").focusout(function(e){
+            // alert($(this).val());
+            var nis = $(this).val();
+            $.ajax({
+            type: "POST",
+            url: "{{ route('books.getfield') }}",
+            data: {
+                'nis': nis,
+                '_token': '{{ csrf_token() }}' // Include the CSRF token
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#name').val(data.name);
+                $('#jk').val(data.jk);
+            },
+            error: function (response) {
+                alert(response.responseJSON.message);
+            }
+        });
+    });
+    </script>
+@endsection

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nis extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'nis';
     protected $fillable = [
         'nis',
         'name',

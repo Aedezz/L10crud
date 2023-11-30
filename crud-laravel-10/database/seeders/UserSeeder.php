@@ -11,9 +11,9 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Rawr',
-            'username' => 'Rawr',
+            'username' => 'Rawr', // Make sure the 'username' is included
             'email' => 'sugoi@email.com',
-            'password' => Hash::make('123'),
+            'password' => bcrypt('123'), // Use bcrypt for password hashing
             'role' => 'user',
             'created_at' => now(),
             'updated_at' => now(),
@@ -21,9 +21,9 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'admin',
-            'username' => 'admin',
+            'username' => 'admin', // Make sure the 'username' is included
             'email' => 'garden@email.com',
-            'password' => Hash::make('admin'),
+            'password' => bcrypt('admin'), // Use bcrypt for password hashing
             'role' => 'admin',
             'created_at' => now(),
             'updated_at' => now(),
