@@ -21,9 +21,9 @@
                 <label class="form-label">NIS</label>
                 <input type="text" name="nis" class="form-control" placeholder="NIS" value="{{ $book->nis }}">
             </div>
-            {{-- <label class="form-label">Nama</label>
+            <label class="form-label">Nama</label>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Book Name" value="{{ $book->name }}">
-            </div> --}}
+            </div>
             <div class="col mb-3">
             <label class="form-label">Kelas</label>
                 <input type="text" name="kelas" class="form-control" placeholder="Kelas" value="{{ $book->kelas }}">

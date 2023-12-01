@@ -134,12 +134,18 @@ class BookController extends Controller
      */
     public function edit($iduks)
     {
-        $book = Book::where('iduks', $iduks)->first();
+        $book = Book::join('nis','books.nis','=','nis.nis')
+            ->join('kelas','books.idkelas','=','kelas.idkelas')
+            ->where('iduks', $iduks)
+            ->first();
+
         if (!$book) {
             return view('pages.book.edit')->with('failed', "Data doesn't exist!");
         }
+
         return view('pages.book.edit', compact('book'));
     }
+
 
     /**
      * Update the specified resource in storage.
