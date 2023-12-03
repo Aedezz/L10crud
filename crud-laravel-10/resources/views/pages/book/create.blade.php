@@ -52,6 +52,8 @@
             </div>
         </div>
     </form>
+
+    {{-- Script Auto Fill --}}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $("#nis").focusout(function(e){

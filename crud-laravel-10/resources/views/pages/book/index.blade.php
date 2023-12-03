@@ -92,8 +92,6 @@
         $(document).ready(function () {
             // Your existing document.ready code...
         });
-    </script>
-
-    
+    </script>    
 
 @endsection

@@ -45,10 +45,7 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::middleware(['isLogin'])->group(function () {
-    Route::get('user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
-    // Add other authenticated routes here
-});
+Route::get('user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
 // // Admin Routes
 // Route::middleware(['auth', 'role:admin'])->group(function () {
 //     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -62,7 +59,7 @@ Route::middleware(['isLogin'])->group(function () {
 //     Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
 // });
 
-// BOOK/DATA TRANSAKSI
+// BOOK/DATA TRANSAKSI UKS
 Route::resource('book', BookController::class);
 Route::post('/books/getfield', [BookController::class, 'getfield'])->name('books.getfield');
 
@@ -71,9 +68,13 @@ Route::match(['get', 'post'], '/book/search', [BookController::class, 'search'])
 // NIS
 Route::resource('/addnis', AdddNisController::class);
 
+Route::post('/addnis/getfield', [AdddNisController::class, 'getfield'])->name('addnis.getfield');
+Route::match(['get', 'post'], '/addnis/search', [AdddNisController::class, 'search'])->name('search.addnis');
+
 // KELAS
 Route::resource('/addkelas', AddKelasController::class);
-
+Route::post('/addkelas/getfield', [AddKelasController::class, 'getfield'])->name('addkelas.getfield');
+Route::match(['get', 'post'], '/addkelas/search', [AddKelasController::class, 'search'])->name('search.addkelas');
 
 Route::get('/dashboard',[DashboardController::class, 'index']);
 

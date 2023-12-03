@@ -17,6 +17,26 @@ class AddKelasController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search', '');
+
+        $query = Kelas::orderBy('created_at', 'DESC');
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('idkelas', 'LIKE', '%' . $search . '%')
+                    ->orWhere('ta', 'LIKE', '%' . $search . '%')
+                    ->orWhere('kelas', 'LIKE', '%' . $search . '%')
+                    ->orWhere('jurusan', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+        $kelas = $query->paginate(5);
+        return view('pages.kelas.index', compact('kelas'));
+    }
+
     public function index()
     {
         $kelas = Kelas::orderBy('created_at', 'DESC')->paginate(5);

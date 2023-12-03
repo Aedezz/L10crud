@@ -16,9 +16,27 @@ class AdddNisController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function search(Request $request)
+    {
+        $search = $request->input('search', '');
+
+        $query = Nis::orderBy('created_at', 'DESC');
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('nis', 'LIKE', '%' . $search . '%')
+                    ->orWhere('name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('jk', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+        $nis = $query->paginate(5);
+        return view('pages.nis.index', compact('nis'));
+    }
+
     public function index()
     {
-        $nis = Nis::orderBy('created_at', 'DESC')->paginate(5);
+        $nis = NIs::orderBy('created_at', 'DESC')->paginate(5);
         return view('pages.nis.index', compact('nis'));
     }
 

@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function index()
     {
         Auth::logout();
-        return View('session/index');
+        return View('dashboard/index');
     }
 
     public function showLoginForm()
