@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kelas;
-
+use Illuminate\Validation\Rule;
 
 class AddKelasController extends Controller
 {
@@ -37,12 +37,16 @@ class AddKelasController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'idkelas' => 'required|numeric',
-            // 'nip' => 'required|numeric|digits:9',
+            'idkelas' => [
+                'required',
+                'numeric',
+                Rule::unique('kelas'), // Check uniqueness in the 'kelas' table
+            ],
             'ta' => 'required',
             'kelas' => 'required|string',
             'jurusan' => 'required|string',
         ], [
+            'idkelas.unique' => 'The ID Kelas has already been taken.', 
             'idkelas.required' => 'The ID Kelas field is required.',
             'idkelas.numeric' => 'The ID Kelas field must be a number.',
             // 'nip.required' => 'The NIP field is required.',
@@ -92,12 +96,16 @@ class AddKelasController extends Controller
 
         if ($kelas) {
             $validatedData = $request->validate([
-                'idkelas' => 'required|numeric',
-                // 'nip' => 'required|numeric|digits:9',
+                'idkelas' => [
+                    'required',
+                    'numeric',
+                    Rule::unique('kelas')->ignore($kelas->id), // Ignore the current record
+                ],
                 'ta' => 'required',
                 'kelas' => 'required|string',
                 'jurusan' => 'required|string',
             ], [
+                'idkelas.unique' => 'The ID Kelas has already been taken.', 
                 'idkelas.required' => 'The ID Kelas field is required.',
                 'idkelas.numeric' => 'The ID Kelas field must be a number.',
                 // 'nip.required' => 'The NIP field is required.',

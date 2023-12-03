@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Nis;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
@@ -90,13 +91,18 @@ class BookController extends Controller
     {
         // dd($request->all());
         $validatedData = $request->validate([
-            'nis' => 'required|digits:9|numeric',
+            'nis' => [
+                'required',
+                'numeric',
+                'digits:9',
+                Rule::unique('nis'), // Check uniqueness in the 'nis' table
+            ],
             'idkelas' => 'required',
             'sakit' => 'required',
             'penanganan' => 'required',
             'petugas' => 'required',
-            
         ], [
+            'nis.unique' => 'The NIS has already been taken.', 
             'nis.required' => 'The NIS field is required.',
             'idkelas.required' => 'The Kelas field is required.',
             'sakit.required' => 'The Sakit field is required.',
@@ -153,7 +159,12 @@ class BookController extends Controller
     public function update(Request $request, string $iduks)
     {
         $validatedData = $request->validate([
-            'nis' => 'required|digits:9|numeric',
+            'nis' => [
+                'required',
+                'numeric',
+                'digits:9',
+                Rule::unique('nis'), // Check uniqueness in the 'nis' table
+            ],
             'name' => 'required',
             'kelas' => 'required',
             'jk' => 'required',
@@ -161,6 +172,7 @@ class BookController extends Controller
             'penanganan' => 'required',
             'petugas' => 'required',
         ], [
+            'nis.unique' => 'The NIS has already been taken.', 
             'nis.required' => 'The NIS field is required.',
             'nis.numeric' => 'The NIS field must be a number.',
             'name.required' => 'The Nama field is required.',

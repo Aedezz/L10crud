@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Nis;
+use Illuminate\Validation\Rule;
 
 class AdddNisController extends Controller
 {
@@ -36,10 +37,16 @@ class AdddNisController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nis' => 'required|digits:9|numeric',
+            'nis' => [
+                'required',
+                'numeric',
+                'digits:9',
+                Rule::unique('nis'), // Check uniqueness in the 'nis' table
+            ],
             'name' => 'required|string',
             'jk' => 'required|string',
         ], [
+            'nis.unique' => 'The NIS has already been taken.', 
             'nis.required' => 'The NIS field is required.',
             'nis.digits' => 'The NIS field must be 9 digits.',
             'name.required' => 'The Name field is required.',
@@ -73,7 +80,6 @@ class AdddNisController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -83,10 +89,16 @@ class AdddNisController extends Controller
 
         if ($nis) {
             $validatedData = $request->validate([
-                'nis' => 'required|numeric|digits:9',
-                'name' => 'required',
-                'jk' =>'required',
+                'nis' => [
+                    'required',
+                    'numeric',
+                    'digits:9',
+                    Rule::unique('nis')->ignore($nis->id), // Ignore the current record
+                ],
+                'name' => 'required|string',
+                'jk' => 'required|string',
             ], [
+                'nis.unique' => 'The NIS has already been taken.', 
                 'nis.required' => 'The NIS field is required.',
                 'nis.numeric' => 'The NIS field must be a number.',
                 'name.required' => 'The Name field is required.',
