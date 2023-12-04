@@ -49,6 +49,7 @@
             Swal.fire({
             position: 'center',
             icon: 'error',
+            text: 'Maaf ada yang kurang'
             showConfirmButton: false,
             timer: 1500,
         });
